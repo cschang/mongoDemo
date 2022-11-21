@@ -1,0 +1,9 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost
+      database: Line
+line.bot:
+  channel-token: ${LINE_TOKEN}
+  channel-secret: ${LINE_SECRET}
+  handler.path: /callback
