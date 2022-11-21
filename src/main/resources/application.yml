@@ -2,7 +2,7 @@ spring:
   data:
     mongodb:
       uri: mongodb://localhost
-      database: Line
+      database: LineData
 line.bot:
   channel-token: ${LINE_TOKEN}
   channel-secret: ${LINE_SECRET}

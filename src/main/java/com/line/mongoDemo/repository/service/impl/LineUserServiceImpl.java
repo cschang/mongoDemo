@@ -8,8 +8,10 @@ import com.linecorp.bot.model.event.message.TextMessageContent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Service
 public class LineUserServiceImpl implements LineUserService {
@@ -27,8 +29,15 @@ public class LineUserServiceImpl implements LineUserService {
 
 
     @Override
-    public List<MessageContent> findMessageByUserId(String userId) {
+    public List<TextMessageContent> findMessageByUserId(String userId) {
         Optional<LineUser> lineUser = linrRepository.findById(userId);
         return lineUser.get().getContents();
     }
+
+    @Override
+    public String deleteById(String userId) {
+        linrRepository.deleteById(userId);
+        return userId +" is deleted";
+    }
+
 }

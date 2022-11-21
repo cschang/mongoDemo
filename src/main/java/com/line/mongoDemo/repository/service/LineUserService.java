@@ -14,5 +14,7 @@ public interface LineUserService {
     public LineUser addLineUser(LineUser lineUser);
 
     Optional<LineUser> findByUserId(String userId);
-    public List<MessageContent> findMessageByUserId(String userId);
+    List<TextMessageContent> findMessageByUserId(String userId);
+    String deleteById(String userId);
+
 }

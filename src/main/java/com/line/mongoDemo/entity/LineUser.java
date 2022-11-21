@@ -16,14 +16,14 @@ import java.util.List;
 public class LineUser {
     @Id
     private String userId;
-    private List<MessageContent> contents;
-    public LineUser(String userId, MessageContent message) {
+    private List<TextMessageContent> contents;
+    public LineUser(String userId, TextMessageContent message) {
         this.userId = userId;
-        this.contents = new ArrayList<MessageContent>();
+        this.contents = new ArrayList<>();
         this.contents.add(message);
     }
 
-    public void addConetnts(MessageContent message) {
+    public void addConetnts(TextMessageContent message) {
         this.contents.add(message);
     }
 }

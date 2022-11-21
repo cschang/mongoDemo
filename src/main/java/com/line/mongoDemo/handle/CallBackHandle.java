@@ -1,4 +1,4 @@
-package com.line.mongoDemo;
+package com.line.mongoDemo.handle;
 
 import com.line.mongoDemo.entity.LineUser;
 import com.line.mongoDemo.repository.service.LineUserService;
@@ -23,21 +23,19 @@ public class CallBackHandle {
     private LineUserService service;
 
     @EventMapping
-    public Message handleTextMessageEvent(MessageEvent<MessageContent> event) {
+    public Message handleTextMessageEvent(MessageEvent<TextMessageContent> event) {
         log.info("event: " + event);
-        handleMongoOperate(event.getSource().getUserId(),event.getMessage());
+
         if ( event.getMessage() instanceof  TextMessageContent ){
-            final String originalMessageText =((TextMessageContent)event.getMessage()) .getText();
+            handleMongoOperate(event.getSource().getUserId(),event.getMessage());
+            String originalMessageText =((TextMessageContent)event.getMessage()) .getText();
             return new TextMessage(originalMessageText);
-        } else if (event.getMessage() instanceof ImageMessageContent){
-            return new TextMessage("receive your image");
-        }else if (event.getMessage() instanceof FileMessageContent){
-            return new TextMessage("receive your file");
-        }else {
+        } else {
             return new TextMessage("receive your data");
         }
+
     }
-    private void handleMongoOperate(String userId, MessageContent message) {
+    private void handleMongoOperate(String userId, TextMessageContent message) {
         service.findByUserId(userId).ifPresentOrElse(lineUser->{
             log.info("exist: "+ lineUser);
             lineUser.addConetnts(message);
